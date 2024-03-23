@@ -8,6 +8,8 @@ const swaggerUi = require("swagger-ui-express");
 const cors = require("cors");
 //Pegar diretorio dos arquivos do sistema OS
 const path = require("path");
+// Validar token do JWT
+const { authenticateToken } = require("./helps/jwt");
 
 // Criando uma instância da aplicação Express.
 const app = express();
@@ -18,7 +20,7 @@ app.use(express.json());
 app.use(cors());
 
 // Rotas
-const auth = require("./routes/auth")
+const auth = require("./routes/auth");
 const produtosRouter = require("./routes/produtos");
 const usuariosRouter = require("./routes/usuarios");
 const pedidosRouter = require("./routes/pedidos");
@@ -76,12 +78,11 @@ app.get("/versao-valid", (req, res) => {
  */
 app.use("/", auth);
 
-// (req, res) => res.status(200).send("API express")
-//End Point's
-app.use("/produtos", produtosRouter);
-app.use("/usuarios", usuariosRouter);
-app.use("/pedidos", pedidosRouter);
-
+// Middleware para proteger os endpoints
+// Autenticado
+app.use("/produtos", authenticateToken, produtosRouter);
+app.use("/usuarios", authenticateToken, usuariosRouter);
+app.use("/pedidos", authenticateToken, pedidosRouter);
 
 // Iniciando o servidor na porta definida.
 app.listen(port, () => console.log(`Server listening on port ${port}`));
