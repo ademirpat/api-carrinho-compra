@@ -11,12 +11,27 @@ const createToken = async (usuario) => {
 };
 
 const authenticateToken = async (req, res, next) => {
-  console.log("====================================");
-  console.log("authenticateToken: ", req.headers);
-  console.log("====================================");
-  // const token = req.headers["x-access-token"];
-  if (true) {
-    return next();
+  const authorization = req.headers["authorization"];
+  const token = authorization && authorization.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, segredo);
+    console.log(decoded);
+
+    console.log("====================================");
+    console.log("authenticateToken: ", token);
+    console.log(decoded);
+    console.log("====================================");
+    // const token = req.headers["x-access-token"];
+    if (true) {
+      return next();
+    }
+  } catch (error) {
+    console.log('====================================');
+    console.log(error);
+    console.log('====================================');
+
+    res.status(403).json({});
   }
 };
 
