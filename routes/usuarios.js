@@ -71,8 +71,7 @@ router.delete("/", async (req, res) => {
 
 // CRUD de usuario Pedidos
 router.get("/pedidos", async (req, res) => {
-  //TODO::Usuario LOGADO
-  const { email } = req.body;
+  const { email } = res.auth;
 
   const usuario = await pedidos(email);
 

@@ -35,4 +35,28 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/create", async (req, res) => {
+  const dataToInsert = req.body;
+
+  if (!dataToInsert.nome || !dataToInsert.email) {
+    res.status(400).send("Nome ou preço do produto não foi informado(a).");
+    return;
+  }
+
+  //Validar usuario existente
+  if ((await findUsuario(dataToInsert.email)) != null) {
+    res.status(400).send("Uusario já cadastrado!");
+    return;
+  }
+
+  // Trocar o json do usuario pelo token JTW
+  const new_usuario = await createUsuarios(dataToInsert);
+
+  if (new_usuario.id === undefined) {
+    res.status(500).send(new_usuario);
+  }
+
+  res.status(201).send(new_usuario);
+});
+
 module.exports = router;
