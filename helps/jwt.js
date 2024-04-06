@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { findUsuario } = require("../repository/usuarios-repository");
 
 const segredo = "meuSegredoSuperSecreto";
 
@@ -16,20 +17,20 @@ const authenticateToken = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, segredo);
-    console.log(decoded);
 
-    console.log("====================================");
-    console.log("authenticateToken: ", token);
-    console.log(decoded);
-    console.log("====================================");
-    // const token = req.headers["x-access-token"];
-    if (true) {
-      return next();
+    const usuario = await findUsuario(decoded.email);
+
+    if (usuario) {
+      res.auth = usuario;
+
+      next();
+    } else {
+      res.status(403).json({});
     }
   } catch (error) {
-    console.log('====================================');
+    console.log("====================================");
     console.log(error);
-    console.log('====================================');
+    console.log("====================================");
 
     res.status(403).json({});
   }
