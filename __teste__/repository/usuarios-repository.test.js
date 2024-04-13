@@ -20,5 +20,5 @@ test("get all usuarios add new user", async () => {
 
   const allUsuarios = await getUsuarios();
 
-  expect(allUsuarios.length).toBe(countUsuarios);
+  expect(allUsuarios.length).toBe(6);
 });

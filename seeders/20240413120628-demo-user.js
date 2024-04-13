@@ -57,16 +57,7 @@ module.exports = {
           updatedAt: "2024-04-06 11:39:53",
           password:
             "$2b$10$xAdwZLKVhh9YOfg2DbLedeJ4oT.cT0eIpCfm0yaxE.4tyxI/ICl76",
-        },
-        {
-          id: 8,
-          nome: "teste 23456",
-          email: "dfghjkliiiii@gmail.com",
-          createdAt: "2024-04-13 11:56:31",
-          updatedAt: "2024-04-13 11:56:31",
-          password:
-            "$2b$10$ZQpnzNvyhUqSn0toCgDkM.ajO4wYYnCXqejx99Qg9iUx.B4WgUP4m",
-        },
+        }
       ],
       {}
     );
