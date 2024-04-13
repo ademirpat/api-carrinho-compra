@@ -16,7 +16,7 @@ router.post("/login", async (req, res) => {
   const usuario = await findUsuario(email, "password");
 
   if (!usuario) {
-    res.status(404).send("usuario não localizado.");
+    res.status(401).json({});
     return;
   }
 
