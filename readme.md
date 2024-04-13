@@ -88,3 +88,8 @@ ERROR: Cannot delete property 'meta' of [object Array]
 Solução:
 npm install mariadb@2 --save
 ````
+
+Criando novos dados para o banco
+````
+npx sequelize-cli seed:generate --name demo-user
+````
