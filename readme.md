@@ -15,7 +15,7 @@ Exemplo utilizado para colegas de turma.
 ```
 git clone https://github.com/lucivandosousa/api-express-array.git
 ```
-### 2. Navegue até o diretório do projeto
+### 2. Navegue até o diretório do projeto;
 
 ### 3. Instale as dependências necessárias:
 
